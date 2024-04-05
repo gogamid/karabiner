@@ -8,9 +8,24 @@ const rules: KarabinerRules[] = [
     description: "Hyper Key (⌃⌥⇧⌘)",
     manipulators: [
       {
-        description: "Caps Lock -> Hyper Key",
+        description: "Caps Lock -> Control",
         from: {
           key_code: "caps_lock",
+          modifiers: {
+            optional: ["any"],
+          },
+        },
+        to: [
+          {
+            key_code: "left_control",
+          },
+        ],
+        type: "basic",
+      },
+      {
+        description: "Tab -> Hyper Key",
+        from: {
+          key_code: "tab",
           modifiers: {
             optional: ["any"],
           },
@@ -33,7 +48,7 @@ const rules: KarabinerRules[] = [
         ],
         to_if_alone: [
           {
-            key_code: "escape",
+            key_code: "tab",
           },
         ],
         type: "basic",
@@ -56,47 +71,20 @@ const rules: KarabinerRules[] = [
     ],
   },
   ...createHyperSubLayers({
-    spacebar: open(
-      "raycast://extensions/stellate/mxstbr-commands/create-notion-todo"
-    ),
-    // b = "B"rowse
-    b: {
-      t: open("https://twitter.com"),
-      // Quarterly "P"lan
-      p: open("https://qrtr.ly/plan"),
-      y: open("https://news.ycombinator.com"),
-      f: open("https://facebook.com"),
-      r: open("https://reddit.com"),
-    },
     // o = "Open" applications
     o: {
-      1: app("1Password"),
       g: app("Google Chrome"),
-      c: app("Notion Calendar"),
+      i: app("IntelliJ IDEA"),
+      c: app("Calendar"),
       v: app("Visual Studio Code"),
       d: app("Discord"),
       s: app("Slack"),
-      e: app("Superhuman"),
-      n: app("Notion"),
-      t: app("Warp"),
-      // Open todo list managed via *H*ypersonic
-      h: open(
-        "notion://www.notion.so/stellatehq/7b33b924746647499d906c55f89d5026"
-      ),
-      z: app("zoom.us"),
-      // "M"essages
-      m: app("Texts"),
+      e: app("Spark"),
+      n: app("Obsidian"),
+      t: app("Wezterm"),
       f: app("Finder"),
-      r: app("Texts"),
-      // "i"Message
-      i: app("Texts"),
       p: app("Spotify"),
-      a: app("iA Presenter"),
-      // "W"hatsApp has been replaced by Texts
-      w: open("Texts"),
-      l: open(
-        "raycast://extensions/stellate/mxstbr-commands/open-mxs-is-shortlink"
-      ),
+      w: open("WhatsApp"),
     },
 
     // w = "Window" via rectangle.app
@@ -235,23 +223,6 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
-      // Turn on Elgato KeyLight
-      y: {
-        to: [
-          {
-            shell_command: `curl -H 'Content-Type: application/json' --request PUT --data '{ "numberOfLights": 1, "lights": [ { "on": 1, "brightness": 100, "temperature": 215 } ] }' http://192.168.8.84:9123/elgato/lights`,
-          },
-        ],
-      },
-      h: {
-        to: [
-          {
-            shell_command: `curl -H 'Content-Type: application/json' --request PUT --data '{ "numberOfLights": 1, "lights": [ { "on": 0, "brightness": 100, "temperature": 215 } ] }' http://192.168.8.84:9123/elgato/lights`,
-          },
-        ],
-      },
-      // "D"o not disturb toggle
-      d: open(`raycast://extensions/yakitrak/do-not-disturb/toggle`),
     },
 
     // v = "moVe" which isn't "m" because we want it to be on the left hand
@@ -299,30 +270,6 @@ const rules: KarabinerRules[] = [
       b: {
         to: [{ key_code: "rewind" }],
       },
-    },
-
-    // r = "Raycast"
-    r: {
-      n: open("raycast://script-commands/dismiss-notifications"),
-      l: open(
-        "raycast://extensions/stellate/mxstbr-commands/create-mxs-is-shortlink"
-      ),
-      e: open(
-        "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
-      ),
-      c: open("raycast://extensions/raycast/system/open-camera"),
-      p: open("raycast://extensions/raycast/raycast/confetti"),
-      a: open("raycast://extensions/raycast/raycast-ai/ai-chat"),
-      s: open("raycast://extensions/peduarte/silent-mention/index"),
-      h: open(
-        "raycast://extensions/raycast/clipboard-history/clipboard-history"
-      ),
-      1: open(
-        "raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-1"
-      ),
-      2: open(
-        "raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-2"
-      ),
     },
   }),
 ];
